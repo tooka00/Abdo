@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>عبدالرحمن عبدالرازق</title>
+  <style>
+    body { font-family: sans-serif; background: #f4f4f4; margin: 0; direction: rtl; }
+    header, footer { background: #333; color: white; padding: 10px; text-align: center; }
+    nav a { margin: 10px; color: white; text-decoration: none; }
+    section { padding: 20px; background: white; margin: 10px; border-radius: 10px; }
+    input, button, textarea { padding: 5px; margin: 5px 0; width: 100%; max-width: 400px; }
+    .program { margin-top: 15px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>عبدالرحمن عبدالرازق</h1>
+  <nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#projects">أعمالي</a>
+    <a href="#tools">برامج حسابية</a>
+    <a href="#contact">التواصل</a>
+  </nav>
+</header>
+
+<section id="home">
+  <h2>مرحباً بكم!</h2>
+  <p>أنا عبدالرحمن عبدالرازق، مهتم بمجال البرمجة وتطوير المواقع. في هذا الموقع ستجد نبذة عن أعمالي وبعض الأدوات البرمجية التي قمت ببنائها.</p>
+</section>
+
+<section id="projects">
+  <h2>أعمالي</h2>
+  <ul>
+    <li>موقع حاسبة هندسية</li>
+    <li>نظام تسجيل حضور</li>
+    <li>تطبيق لحل المعادلات</li>
+  </ul>
+</section>
+
+<section id="tools">
+  <h2>برامج حسابية</h2>
+
+  <div class="program">
+    <h3>حساب حجم الأسطوانة</h3>
+    <input type="number" id="radius" placeholder="نصف القطر">
+    <input type="number" id="height" placeholder="الارتفاع">
+    <button onclick="calcCylinder()">احسب</button>
+    <p id="cylinderResult"></p>
+  </div>
+
+  <div class="program">
+    <h3>مساحة الدائرة</h3>
+    <input type="number" id="circleRadius" placeholder="نصف القطر">
+    <button onclick="calcCircle()">احسب</button>
+    <p id="circleResult"></p>
+  </div>
+
+  <div class="program">
+    <h3>حل معادلة من الدرجة الثانية</h3>
+    <input type="number" id="a" placeholder="القيمة a">
+    <input type="number" id="b" placeholder="القيمة b">
+    <input type="number" id="c" placeholder="القيمة c">
+    <button onclick="solveQuadratic()">حل</button>
+    <p id="quadResult"></p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>تواصل معي</h2>
+  <p>البريد الإلكتروني: <a href="mailto:Abdalrhmanabdelrazeg@gmail.com">Abdalrhmanabdelrazeg@gmail.com</a></p>
+  <p>رقم الهاتف: <a href="tel:+249997207071">+249997207071</a></p>
+
+  <h3>نموذج المراسلة</h3>
+  <form onsubmit="sendMessage(event)">
+    <input type="text" placeholder="اسمك" required>
+    <input type="email" placeholder="بريدك الإلكتروني" required>
+    <textarea rows="4" placeholder="رسالتك" required></textarea>
+    <button type="submit">أرسل</button>
+    <p id="formStatus"></p>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 عبدالرحمن عبدالرازق</p>
+</footer>
+
+<script>
+  function calcCylinder() {
+    let r = parseFloat(document.getElementById('radius').value);
+    let h = parseFloat(document.getElementById('height').value);
+    if (isNaN(r) || isNaN(h)) return;
+    let volume = Math.PI * r * r * h;
+    document.getElementById('cylinderResult').innerText = 'الحجم = ' + volume.toFixed(2);
+  }
+
+  function calcCircle() {
+    let r = parseFloat(document.getElementById('circleRadius').value);
+    if (isNaN(r)) return;
+    let area = Math.PI * r * r;
+    document.getElementById('circleResult').innerText = 'المساحة = ' + area.toFixed(2);
+  }
+
+  function solveQuadratic() {
+    let a = parseFloat(document.getElementById('a').value);
+    let b = parseFloat(document.getElementById('b').value);
+    let c = parseFloat(document.getElementById('c').value);
+    if (isNaN(a) || isNaN(b) || isNaN(c)) return;
+    let d = b * b - 4 * a * c;
+    let result;
+    if (d > 0) {
+      let x1 = (-b + Math.sqrt(d)) / (2 * a);
+      let x2 = (-b - Math.sqrt(d)) / (2 * a);
+      result = `جذور المعادلة: ${x1.toFixed(2)} و ${x2.toFixed(2)}`;
+    } else if (d === 0) {
+      let x = -b / (2 * a);
+      result = `جذر مزدوج: ${x.toFixed(2)}`;
+    } else {
+      result = "لا توجد جذور حقيقية.";
+    }
+    document.getElementById('quadResult').innerText = result;
+  }
+
+  function sendMessage(event) {
+    event.preventDefault();
+    document.getElementById('formStatus').innerText = "تم إرسال الرسالة (تجريبي)";
+  }
+</script>
+
+</body>
+</html>
